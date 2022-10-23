@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan My Hike</title>
+</head>
+<body>
+    <header>
+        <h1>Hike Planner</h1>
+    </header>
+    <div id="container">
+        <div id="userSelections">
+            <form id="parkSelector">
+                <input type="text" id="user-state" placeholder="Search by state">
+                <input type="text" id="user-park" placeholder="Search by park">
+                <input type="date" id="user-date">
+                <input type="submit" id="submitBtn">
+            </form>
+            <div id="results-index">
+                <ul></ul>
+            </div>
+        </div>
+        <div id="results-display">
+            <div id="weather-display"></div>
+            <div id="park-photos">
+                <a class="prev" >&#10094;</a>
+                <a class="next">&#10095;</a>
+            </div>
+            <div id="park-info">
+                <h2 id="park-name"></h2>
+                <h4>Location</h4>
+                <p id="park-location"></p>
+                <h4>Activities</h4>
+                <p id="park-activities"></p>
+                <h4>Amenities</h4>
+                <p id="park-amenities"></p>
+                <a id="park-url"></a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
