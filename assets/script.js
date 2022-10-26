@@ -4,7 +4,6 @@ var userState = document.querySelector('#user-state'); //State search input fiel
 var userPark = document.querySelector('#user-park'); //Park search input field
 var userDate = document.querySelector('#user-date'); //Date search input field
 var submit = document.querySelector('#submitBtn'); //Submit button for search input fields
-
 var date = moment().format('YYYY-MM-DD');
 var dateMax = moment().add(4,'days').format('YYYY-MM-DD');
 
@@ -25,10 +24,47 @@ var displayData = function(){
 
 //Saves park name to local storage
 var savePark = function(){
-  //Get park name & date
-  //Save Date of planned trip
-  //Save park name to local storage
+  var stateSearch=userState.value.trim();
+  var parkSearch=userPark.value.trim();
+  var datePicker=userDate.value;
+  var dateYear=datePicker.slice(0,4)
+  var dateStart=datePicker.slice(5,10)
+  var dateSearch=dateStart+'-'+dateYear
+  var currentSearch={stateSearch, parkSearch, dateSearch}
+  if (dateSearch != '' && (stateSearch !='' || parkSearch != '')) {
+    var previousSearches = JSON.parse (window.localStorage.getItem ('previousSearches')) || [];
+    previousSearches.push(currentSearch);
+    if (previousSearches.length >10){
+        previousSearches.shift();
+       }
+    window.localStorage.setItem ('previousSearches', JSON.stringify (previousSearches))
+  }
 }
+
+//display search history
+var showSearchHistory=function(){
+  var previousSearches = JSON.parse(localStorage.getItem("previousSearches"))|| []; 
+    if (previousSearches==[]){
+        return;
+    } else {
+    for (var i=0; i<previousSearches.length; i++){
+        var searchItem= document.createElement("li")
+        searchItem.textContent=previousSearches[i].stateSearch + previousSearches[i].parkSearch + ', ' + previousSearches[i].dateSearch
+        searchItem.style.listStyle="none";
+        document.getElementById("search-history").appendChild (searchItem);
+        }
+    }
+
+}
+
+submit.addEventListener ('click', function(event){
+  event.preventDefault()
+  savePark()
+  showSearchHistory()
+})
+/*function displaySearches (){
+    
+}*/
 
 //Updates date on calendar
 var updateDate = function(){
