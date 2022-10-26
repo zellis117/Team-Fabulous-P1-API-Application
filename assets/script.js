@@ -57,11 +57,6 @@ var showSearchHistory=function(){
 
 }
 
-submit.addEventListener ('click', function(event){
-  event.preventDefault()
-  savePark()
-  showSearchHistory()
-})
 /*function displaySearches (){
     
 }*/
