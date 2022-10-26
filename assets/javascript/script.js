@@ -2,8 +2,7 @@
 var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById('current-wind');
 var currentHumidity = document.getElementById('current-humidity');
-var userDate = document.getElementById('user-date');
-var citySelection = 'Fayetteville, NC'
+var citySelection = 'Fayetteville, NC' //Placeholder location
 var userState = document.querySelector('#user-state'); //State search input field
 var userPark = document.querySelector('#user-park'); //Park search input field
 var userDate = document.querySelector('#user-date'); //Date search input field
@@ -18,8 +17,6 @@ function getFiveDay() {
     return response.json();
 })
 .then(function (data) {
-    console.log('forecast data')
-    console.log(data);
     for (i = 0, j =0; i < 40; i += 8, j++) {
         var iconcode = data.list[i].weather[0].icon
         var iconurl = "https://openweathermap.org/img/wn/" + iconcode + ".png";
@@ -55,11 +52,8 @@ function displayWeather() {
         return response.json();
     })
     .then(function (data) {
-        console.log('geocoding data')
-        console.log(data);
         var cityLat = data[0].lat;
         var cityLon = data[0].lon;
-        console.log(cityLat,cityLon);
 
         function getFiveDay() {
             var fiveDayApi = 'https://api.openweathermap.org/data/2.5/forecast?lat='+cityLat+'&lon='+cityLon+'&units=imperial&appid=44ff41a4d8b49abe43f662ec93cbb1a6';
@@ -68,27 +62,16 @@ function displayWeather() {
             return response.json();
         })
         .then(function (data) {
-            console.log('forecast data')
-            console.log(data);
             for (i = 0; i < 40; i += 8) {
                 var iconcode = data.list[i].weather[0].icon
                 var iconurl = "https://openweathermap.org/img/wn/" + iconcode + ".png";
                 var weatherDate = data.list[i].dt * 1000
                 var date_ob = new Date(weatherDate);
-
                 var year = date_ob.getFullYear();
                 var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
                 var date = ("0" + date_ob.getDate()).slice(-2);
-                
                 var forecastDate = year + "-" + month + "-" + date;
-                console.log(forecastDate);
-                // weatherDate = new Date(weatherDate);
-                // weatherDate = weatherDate.toLocaleString('en-US');
-                // weatherDate = weatherDate.split(',');
-                // console.log(weatherDate[0])
-                console.log(userDate.value)
                 if (userDate.value === forecastDate){
-                // if (chosenDate === )
                 $('#icon').attr('src', iconurl);
                 currentTemp.innerHTML = 'Temp: ' + data.list[i].main.temp + '&deg; fahrenheit';
                 currentWind.innerHTML = 'Wind: ' + data.list[i].wind.speed + 'Mph';
