@@ -18,19 +18,43 @@ var getWeatherData = function(park){
 var getParkData = function(event){
   event.preventDefault();
   var parkName = userPark.value.trim();
-  var parkUrl = 'https://developer.nps.gov/api/v1/parks?q='+ parkName +'&api_key=mQeAwUWTr41jOO5rCy7tm8oFaLVV4kFa7clCHQyI';
-  //Fetch park API
-  fetch(parkUrl)
-  .then(function (response){
-    return response.json();
-  })
-  .then(function (data){
-    console.log(data);
-    console.log(parkName);
-  })
-  .catch(function (error) {
-    alert('It didnt work');
-  });
+  var stateCode = userState.value;
+  var stateUrl = 'https://developer.nps.gov/api/v1/parks?api_key=mQeAwUWTr41jOO5rCy7tm8oFaLVV4kFa7clCHQyI&limit=10&stateCode=' + stateCode;
+  var parkUrl = 'https://developer.nps.gov/api/v1/parks?q='+ parkName +'&api_key=mQeAwUWTr41jOO5rCy7tm8oFaLVV4kFa7clCHQyI&limit=10';
+  if(parkName !== ""){
+    //Fetch park API
+    fetch(parkUrl)
+    .then(function (response){
+      return response.json();
+    })
+    .then(function (data){
+      console.log(data);
+      console.log(parkName);
+      /*
+      Tony's stuff goes here
+      */
+    })
+    .catch(function (error) {
+      alert('It didnt work');
+    });
+  } else if(stateCode !== "") {
+    fetch(stateUrl)
+    .then(function (response){
+      return response.json();
+    })
+    .then(function (data){
+      console.log(data);
+      console.log(stateCode);
+      /*
+      Tony's stuff goes here
+      */
+    })
+    .catch(function (error) {
+      alert('It didnt work');
+    });
+  } else {
+    console.log("fix it!");
+  }
 }
 
 //Displays information to the page
