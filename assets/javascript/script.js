@@ -41,22 +41,25 @@ function getFiveDay() {
 
 
 
-function displayWeather() {
-        
-    if (citySelection === '') { return }
-    var geoApi = 'http://api.openweathermap.org/geo/1.0/direct?q='+citySelection+',US&limit=1&appid=44ff41a4d8b49abe43f662ec93cbb1a6';
-    console.log(citySelection);
-    
-    fetch(geoApi)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        var cityLat = data[0].lat;
-        var cityLon = data[0].lon;
+// Fetches park data based on park code, then fetches weather for chosen date using park coordinates
+    var getParkData = function(event) {
 
-        function getFiveDay() {
-            var fiveDayApi = 'https://api.openweathermap.org/data/2.5/forecast?lat='+cityLat+'&lon='+cityLon+'&units=imperial&appid=44ff41a4d8b49abe43f662ec93cbb1a6';
+        event.preventDefault();
+        var parkName = userPark.value.trim();
+        var parkUrl = 'https://developer.nps.gov/api/v1/parks?parkCode='+ parkName +'&api_key=mQeAwUWTr41jOO5rCy7tm8oFaLVV4kFa7clCHQyI';
+        //Fetch park API
+        fetch(parkUrl)
+        .then(function (response){
+          return response.json();
+        })
+        .then(function (data){
+          console.log(data);
+          console.log(parkName);
+          var parkLat = data.data[0].latitude
+          var parkLon = data.data[0].longitude
+          console.log(parkLat, parkLon)
+          function getFiveDay() {
+            var fiveDayApi = 'https://api.openweathermap.org/data/2.5/forecast?lat='+parkLat+'&lon='+parkLon+'&units=imperial&appid=44ff41a4d8b49abe43f662ec93cbb1a6';
             fetch(fiveDayApi) 
         .then(function (response) {
             return response.json();
@@ -81,16 +84,43 @@ function displayWeather() {
             })
         }
 
-        getFiveDay();
-    })
+        getFiveDay()
+        })
+      //   .catch(function (error) {
+      //     alert('It didnt work');
+      //   });
+      }
+    
+
+//---------------------------------------------------------------------
+
+//Call to weather API to get forecast
+var getWeatherData = function(park){
+  //Weather API stuff
 }
 
+//Displays information to the page
+var getInfo = function(){
+  getParkData(userPark.value.trim());
+}
+
+//Saves park name to local storage
+var savePark = function(){
+  //Get park name & date
+  //Save Date of planned trip
+  //Save park name to local storage
+}
+
+//Updates date on calendar
+var updateDate = function(){
+  userDate.min = date;
+  userDate.max = dateMax;
+}
+
+//Listeners for inputs and button clicks
+updateDate();
+submit.addEventListener("click", getParkData);
 //Project 1 - Team Fabulous
-
-//Call to park API to get park info
-var getParkData = function(){
-  //Fetch park API
-}
 
 //Displays information to the page
 var displayData = function(){
