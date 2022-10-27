@@ -1,6 +1,7 @@
 //Project 1 - Team Fabulous
 //Selectors for HTML Elements
-var userState = document.querySelector('#user-state'); //State search input field
+var userState=document.getElementById('user-state') //State search input field
+//state code= userState.value
 var userPark = document.querySelector('#user-park'); //Park search input field
 var userDate = document.querySelector('#user-date'); //Date search input field
 var submit = document.querySelector('#submitBtn'); //Submit button for search input fields
@@ -24,14 +25,15 @@ var displayData = function(){
 
 //Saves park name to local storage
 var savePark = function(){
-  var stateSearch=userState.value.trim();
+  var stateSearchIndex=userState.selectedIndex;
+  var stateSearch=userState[stateSearchIndex].text.trim();
   var parkSearch=userPark.value.trim();
   var datePicker=userDate.value;
   var dateYear=datePicker.slice(0,4)
   var dateStart=datePicker.slice(5,10)
   var dateSearch=dateStart+'-'+dateYear
   var currentSearch={stateSearch, parkSearch, dateSearch}
-  if (dateSearch != '' && (stateSearch !='' || parkSearch != '')) {
+  if (dateSearch != '' && (stateSearchIndex >0 || parkSearch != '')) {
     var previousSearches = JSON.parse (window.localStorage.getItem ('previousSearches')) || [];
     previousSearches.push(currentSearch);
     if (previousSearches.length >10){
@@ -40,6 +42,7 @@ var savePark = function(){
     window.localStorage.setItem ('previousSearches', JSON.stringify (previousSearches))
   }
 }
+
 
 //display search history
 var showSearchHistory=function(){
