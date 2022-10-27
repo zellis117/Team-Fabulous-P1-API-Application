@@ -1,45 +1,17 @@
-
 var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById('current-wind');
 var currentHumidity = document.getElementById('current-humidity');
-var citySelection = 'Fayetteville, NC' //Placeholder location
 var userState = document.querySelector('#user-state'); //State search input field
 var userPark = document.querySelector('#user-park'); //Park search input field
 var userDate = document.querySelector('#user-date'); //Date search input field
 var submit = document.querySelector('#submitBtn'); //Submit button for search input fields
 var date = moment().format('YYYY-MM-DD');
 var dateMax = moment().add(4,'days').format('YYYY-MM-DD');
-
-function getFiveDay() {
-    var fiveDayApi = 'https://api.openweathermap.org/data/2.5/forecast?lat='+cityLat+'&lon='+cityLon+'&units=imperial&appid=44ff41a4d8b49abe43f662ec93cbb1a6';
-    fetch(fiveDayApi) 
-.then(function (response) {
-    return response.json();
-})
-.then(function (data) {
-    for (i = 0, j =0; i < 40; i += 8, j++) {
-        var iconcode = data.list[i].weather[0].icon
-        var iconurl = "https://openweathermap.org/img/wn/" + iconcode + ".png";
-        var weatherDate = data.list[i].dt * 1000
-        weatherDate = new Date(weatherDate);
-        weatherDate = weatherDate.toLocaleString('en-US');
-        weatherDate = weatherDate.split(',');
-        document.getElementById(dailyIcons[j]).setAttribute('src', iconurl);
-        document.getElementById(dailyDates[j]).innerHTML = weatherDate[0];
-        document.getElementById(dailyTemps[j]).innerHTML = 'Temp: ' + data.list[i].main.temp + '&deg; fahrenheit';
-        document.getElementById(dailyWind[j]).innerHTML = 'Wind: ' + data.list[i].wind.speed + 'Mph';
-        document.getElementById(dailyHumidity[j]).innerHTML ='Humidity: ' + data.list[i].main.humidity + '%';
-       
-        var weatherDate = data.list[i].dt * 1000
-        weatherDate = new Date(weatherDate);
-        weatherDate = weatherDate.toLocaleString('en-US');
-        weatherDate = weatherDate.split(',');
-        
-    }
-    })
-}
-
-
+var parkName = document.getElementById('park-name');
+var parkLocation = document.getElementById('park-location');
+var parkActivities = document.getElementById('park-activities');
+var parkAmenities = document.getElementById('park-amenities');
+var parkLink = $('#park-url');
 
 // Fetches park data based on park code, then fetches weather for chosen date using park coordinates
     var getParkData = function(event) {
@@ -58,6 +30,14 @@ function getFiveDay() {
           var parkLat = data.data[0].latitude
           var parkLon = data.data[0].longitude
           console.log(parkLat, parkLon)
+          parkName.innerHTML = data.data[0].fullName
+          parkLocation.innerHTML = data.data[0].addresses[0].line1 + ' ' + data.data[0].addresses[0].city + ', ' + data.data[0].addresses[0].stateCode;
+          parkActivities.innerHTML = data.data[0].activities[0].name;
+          for (i = 1; i < data.data[0].activities.length; i++) {
+            parkActivities.innerHTML = parkActivities.innerHTML + ', ' + data.data[0].activities[i].name
+          }
+          parkLink.attr('href', data.data[0].url)
+
           function getFiveDay() {
             var fiveDayApi = 'https://api.openweathermap.org/data/2.5/forecast?lat='+parkLat+'&lon='+parkLon+'&units=imperial&appid=44ff41a4d8b49abe43f662ec93cbb1a6';
             fetch(fiveDayApi) 
