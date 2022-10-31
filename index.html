@@ -159,7 +159,7 @@
 
     </div>
     
-<!-- Container to display weather -->
+<!-- Container to display park info -->
     <div class="col-md-9">
         <div class="row">
         <div class="col-md-12">
@@ -171,7 +171,7 @@
         </div>
       </div>
 
-<!-- Container to display photos -->
+<!-- Container to display weather -->
       <div class="row">
         <div class="col-md-12">
           <div class="well" id="weather-display">
@@ -182,14 +182,40 @@
         </div>
       </div>
 
-<!-- Container to display park info -->
+<!-- Container to display park photos -->
       <div class="row">
         <div class="col-md-12">
-          <div class="well" id="park-photos">
-            <p></p>
+          <div class=" well carousel slide" id="slides" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#slides" data-slide-to="0" class="active"></li>
+              <li data-target="#slides" data-slide-to="1"></li>
+              <li data-target="#slides" data-slide-to="2"></li>
+              <li data-target="#slides" data-slide-to="3"></li>
+              <li data-target="#slides" data-slide-to="4"></li>
+              <!-- <li data-target="#slides" data-slide-to="5"></li>
+              <li data-target="#slides" data-slide-to="6"></li> -->
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="assets\Images\slide1.jpg" alt="first slide">
+            </div>
+              <div class="carousel-item">
+                <img src="assets\Images\slide2.jpg" alt="second slide">
+            </div>
+            <div class="carousel-item">
+              <img src="assets\Images\slide3.jpg" alt="third slide">
+            </div>
+            <div class="carousel-item">
+              <img src="#4" alt="fourth slide">
+            </div>
+            <!-- <div class="carousel-item">
+              <img src="#5">
+            </div>
+            <div class="carousel-item">
+              <img src="#6">
+            </div> -->
           </div>
         </div>
-      </div>
      
       </div>     
     </div>
