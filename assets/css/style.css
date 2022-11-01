@@ -41,15 +41,22 @@
       font-size: 65px;
       font-weight: 200;
       text-align: center;
-      position: relative
-      top: 50%;  
+      position: relative;
       transform: translate(0, 100%) 
   } 
 
+  #weather-header {
+    text-decoration: underline;
+  }
   
+  #icon-bg {
+    background-color: grey;
+    width: 50px;
+  }
   
-  
-  
+  .hide {
+    display: none;
+  }
   
   #parkSelector {
       margin-left: 90px;
