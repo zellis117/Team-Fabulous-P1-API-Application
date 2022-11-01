@@ -49,6 +49,7 @@
     text-decoration: underline;
   }
   
+
   #icon-bg {
     background-color: grey;
     width: 50px;
@@ -57,6 +58,18 @@
   .hide {
     display: none;
   }
+
+  .carousel-inner img {
+    object-fit: contain;
+    object-position: center;
+    height: 50vh;
+   
+  }
+
+  .carousel-item {
+    display: inline-block
+  }
+  
   
   #parkSelector {
       margin-left: 90px;

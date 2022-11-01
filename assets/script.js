@@ -45,7 +45,6 @@ var getParkData = function(event){
     .then(function (data){
       console.log(data);
       console.log(parkName);
-      resultsDisplay.innerHTML = '';
       for(var i = 0; i<data.data.length; i++){
         var x = document.createElement('button');
         resultsDisplay.appendChild(x);
@@ -71,7 +70,6 @@ var getParkData = function(event){
     .then(function (data){
       console.log(data);
       console.log(stateCode);
-      resultsDisplay.innerHTML = '';
       for(var i = 0; i<data.data.length; i++){
         var x = document.createElement('button');
         resultsDisplay.appendChild(x);
@@ -115,7 +113,28 @@ var getParkById = function(event){
       parkActivities.innerHTML = parkActivities.innerHTML + ', ' + data.data[0].activities[i].name;
     }
     //parkLink.attr('href', data.data[0].url)
+
   })
+
+    parkImages=[];
+    for (var i=0; i<data.data[0].images.length; i++){
+      parkImages.push({url: data.data[0].images[i].url, altText: data.data[0].images[i].altText});
+    }
+    console.log(parkImages)
+    //store carousel items in array
+    var slideOne=document.getElementById('first-slide');
+    var slideTwo=document.getElementById('second-slide');
+    var slideThree=document.getElementById('third-slide');
+    var slideFour=document.getElementById('fourth-slide');
+    var slides=[slideOne, slideTwo, slideThree, slideFour];
+    for (var i=0; i<slides.length; i++){
+        slides[i].setAttribute("src", parkImages[i].url);
+        slides[i].setAttribute("alt", parkImages[i].altText);
+      }
+    })
+
+  
+
 }
 
 //Gets five day forecast and displays on the weather display
@@ -150,6 +169,43 @@ var getFiveDay = function(){
   // })
 }
 
+//Saves searched park to local storage
+var savePark = function(){
+  //Get park name & date
+  var stateSearchIndex=userState.selectedIndex;
+  var stateSearch=userState[stateSearchIndex].text.trim();
+  var parkSearch=userPark.value.trim();
+  //Save Date of planned trip
+  var datePicker=userDate.value;
+  var dateYear=datePicker.slice(0,4)
+  var dateStart=datePicker.slice(5,10)
+  var dateSearch=dateStart+'-'+dateYear
+  var currentSearch={stateSearch, parkSearch, dateSearch}
+  //Save park name to local storage
+  if (dateSearch != '' && (stateSearchIndex >0 || parkSearch != '')) {
+    var previousSearches = JSON.parse (window.localStorage.getItem ('previousSearches')) || [];
+    previousSearches.push(currentSearch);
+    if (previousSearches.length >10){
+        previousSearches.shift();
+       }
+    window.localStorage.setItem ('previousSearches', JSON.stringify (previousSearches))
+  }
+}
+//display search history
+var showSearchHistory=function(){
+  var previousSearches = JSON.parse(localStorage.getItem("previousSearches"))|| [];
+    if (previousSearches==[]){
+        return;
+    } else {
+    for (var i=0; i<previousSearches.length; i++){
+        var searchItem= document.createElement("li")
+        searchItem.textContent=previousSearches[i].stateSearch + previousSearches[i].parkSearch + ', ' + previousSearches[i].dateSearch
+        searchItem.style.listStyle="none";
+        document.getElementById("search-history").appendChild (searchItem);
+        }
+    }
+}
+
 //Updates date on calendar
 var updateDate = function(){
   userDate.min = date;
@@ -162,4 +218,6 @@ console.log(date);
 console.log(dateMax);
 console.log(userDate.Value);
 updateDate();
+showSearchHistory();
 submit.addEventListener("click", getParkData);
+submit.addEventListener("click",savePark);
