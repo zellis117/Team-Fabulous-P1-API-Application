@@ -114,8 +114,6 @@ var getParkById = function(event){
     }
     //parkLink.attr('href', data.data[0].url)
 
-  })
-
     parkImages=[];
     for (var i=0; i<data.data[0].images.length; i++){
       parkImages.push({url: data.data[0].images[i].url, altText: data.data[0].images[i].altText});
@@ -133,7 +131,6 @@ var getParkById = function(event){
       }
     })
 
-  
 
 }
 
