@@ -23,6 +23,7 @@ Please refer to the LICENSE in the repo.
 
 ---
 ## Screenshots
+![Alt Screenshot of application running](./assets/screenshot1.jpg)
 
 ## Deployed Application 
 https://zellis117.github.io/Team-Fabulous-P1-API-Application/ 
