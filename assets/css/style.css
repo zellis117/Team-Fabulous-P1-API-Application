@@ -47,7 +47,16 @@
   } 
 
   
-  
+  .carousel-inner img {
+    object-fit: contain;
+    object-position: center;
+    height: 50vh;
+   
+  }
+
+  .carousel-item {
+    display: inline-block
+  }
   
   
   
