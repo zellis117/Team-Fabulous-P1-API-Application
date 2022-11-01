@@ -17,32 +17,7 @@
 		<h1>Hike Planner</h1> 
 	</header> 
 	
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Instructions</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Instructions</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <ol>
-          <li>Search by National Park name or state.</li>
-          <li>Pick the date of your arrival.</li>
-          <li>Select desired park from results list</li>
-        </ol>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 	
   <!--Black header without photo  -->
   <!-- <div class="main">...</div>   
@@ -150,7 +125,32 @@
 <!-- Container to return results that looks a little wonky now...why?   -->
       
       <div class="well" id="results-display">
-        <!-- Search results -->
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">Instructions</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Instructions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <li>Search by National Park name or state.</li>
+          <li>Pick the date of your arrival.</li>
+          <li>Select desired park from results list</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
 	    <div class="well" id="search-history">
       <!-- Search history -->
@@ -197,16 +197,16 @@
               <li data-target="#slides" data-slide-to="6"></li> -->
             </ol>
             <div class="carousel-inner">
-              <div class="carousel-item active">
+              <div class="item active">
                 <img  id="first-slide">
             </div>
-              <div class="carousel-item">
+              <div class="item">
                 <img id="second-slide">
             </div>
-            <div class="carousel-item">
+            <div class="item">
               <img id="third-slide">
             </div>
-            <div class="carousel-item">
+            <div class="item">
               <img id="fourth-slide">
             </div>
             <!-- <div class="carousel-item">

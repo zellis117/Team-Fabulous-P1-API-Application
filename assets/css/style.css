@@ -31,7 +31,7 @@
   body {
     font-family: 'Crimson Pro', serif;
     font-size: 18px;
-    background-color:rgb(194, 205, 209);
+    background-color:rgb(209, 206, 194);
     font-size: 16px;
     line-height: 1;
     margin-top: 20px;
@@ -77,7 +77,7 @@
   }
   
   #userSelections {
-      background-color: rgb(194, 205, 209);
+      background-color: rgb(209, 206, 194);
       height: 250px;
       padding-right: 50px;
   }  
