@@ -25,3 +25,4 @@ Please refer to the LICENSE in the repo.
 ## Screenshots
 
 ## Deployed Application 
+https://zellis117.github.io/Team-Fabulous-P1-API-Application/ 
