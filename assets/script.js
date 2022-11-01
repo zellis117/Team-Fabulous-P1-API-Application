@@ -45,6 +45,7 @@ var getParkData = function(event){
     .then(function (data){
       console.log(data);
       console.log(parkName);
+      resultsDisplay.innerHTML = '';
       for(var i = 0; i<data.data.length; i++){
         var x = document.createElement('button');
         resultsDisplay.appendChild(x);
@@ -70,6 +71,7 @@ var getParkData = function(event){
     .then(function (data){
       console.log(data);
       console.log(stateCode);
+      resultsDisplay.innerHTML = '';
       for(var i = 0; i<data.data.length; i++){
         var x = document.createElement('button');
         resultsDisplay.appendChild(x);
