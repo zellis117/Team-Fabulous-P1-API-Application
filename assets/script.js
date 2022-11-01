@@ -83,9 +83,9 @@ var getParkData = function(event){
         x.addEventListener("click",getFiveDay);
       }
     })
-    .catch(function (error) {
-      alert('It didnt work');
-    });
+    // .catch(function (error) {
+    //   alert('It didnt work');
+    // });
   } else {
     console.log("fix it!");
   }
@@ -106,12 +106,16 @@ var getParkById = function(event){
     parkLon = data.data[0].longitude;
     console.log(parkLat, parkLon);
     parkName.innerHTML = data.data[0].fullName;
-    parkLocation.innerHTML = data.data[0].addresses[0].line1 + ' ' + data.data[0].addresses[0].city + ', ' + data.data[0].addresses[0].stateCode;
-    parkActivities.innerHTML = data.data[0].activities[0].name;
+    parkLocation.innerHTML = '<strong>Address:</strong><br>' + data.data[0].addresses[0].line1 + ' ' + data.data[0].addresses[0].city + ', ' + data.data[0].addresses[0].stateCode;
+    parkActivities.innerHTML = ''
+    parkActivities.innerHTML = '<strong>Activities:</strong><br>' + data.data[0].activities[0].name;
     for (i = 1; i < data.data[0].activities.length; i++) {
       parkActivities.innerHTML = parkActivities.innerHTML + ', ' + data.data[0].activities[i].name;
     }
     //parkLink.attr('href', data.data[0].url)
+
+  })
+
     parkImages=[];
     for (var i=0; i<data.data[0].images.length; i++){
       parkImages.push({url: data.data[0].images[i].url, altText: data.data[0].images[i].altText});
@@ -128,10 +132,9 @@ var getParkById = function(event){
         slides[i].setAttribute("alt", parkImages[i].altText);
       }
     })
-  .catch(function (error){
-    alert('It didnt work again');
-  })
+
   
+
 }
 
 //Gets five day forecast and displays on the weather display
@@ -154,15 +157,16 @@ var getFiveDay = function(){
       var forecastDate = year + "-" + month + "-" + date;
       if (userDate.value === forecastDate){
         $('#icon').attr('src', iconurl);
+        document.getElementById('weather-header').innerHTML = '<strong>Forecast for ' + forecastDate +'</strong>';
         currentTemp.innerHTML = 'Temp: ' + data.list[i].main.temp + '&deg; fahrenheit';
         currentWind.innerHTML = 'Wind: ' + data.list[i].wind.speed + 'Mph';
         currentHumidity.innerHTML ='Humidity: ' + data.list[i].main.humidity + '%';
       }
     }
   })
-  .catch(function (error) {
-    alert('It didnt work');
-  })
+  // // .catch(function (error) {
+  // //   alert('It didnt work');
+  // })
 }
 
 //Saves searched park to local storage
@@ -206,6 +210,7 @@ var showSearchHistory=function(){
 var updateDate = function(){
   userDate.min = date;
   userDate.max = dateMax;
+  document.getElementById('user-date').valueAsDate = new Date();
 }
 
 //Listeners for inputs and button clicks
